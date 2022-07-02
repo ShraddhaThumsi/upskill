@@ -3,11 +3,14 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn import datasets, linear_model, metrics
+import os
+dirname = os.path.dirname(__file__)
+relative_path_to_file = '../data/preprocessed_files/rbi/crop_data_pairs.csv'
+filename = os.path.join(dirname, relative_path_to_file)
 
-data_pairs_path = 'data/rbi/crop_data_pairs.csv'
 import csv
 
-file = open(data_pairs_path)
+file = open(filename)
 csvreader = csv.reader(file)
 x_axis_vals = []
 y_axis_vals = []

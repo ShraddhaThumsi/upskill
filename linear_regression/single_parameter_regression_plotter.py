@@ -1,4 +1,5 @@
-import single_parameter_regression
+from linear_regression import single_parameter_regression
+
 print('b_0')
 print(single_parameter_regression.b_0)
 print('b_1')

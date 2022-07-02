@@ -1,4 +1,4 @@
-data_pairs_path = 'data/rbi/crop_data_pairs.csv'
+data_pairs_path = '../data/preprocessed_files/rbi/crop_data_pairs.csv'
 import csv
 import numpy as np
 from sklearn import datasets, linear_model, metrics
