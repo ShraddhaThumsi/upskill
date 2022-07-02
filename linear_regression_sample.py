@@ -53,11 +53,11 @@ print('Variance score: {}'.format(reg.score(X_test, y_test)))
 plt.style.use('fivethirtyeight')
 
 ## plotting residual errors in training data
-plt.scatter(reg.predict(X_train), abs(reg.predict(X_train) - y_train),
+plt.scatter(reg.predict(X_train), reg.predict(X_train) - y_train,
 			color = "green", s = 10, label = 'Train data')
 
 ## plotting residual errors in test data
-plt.scatter(reg.predict(X_test), abs(reg.predict(X_test) - y_test),
+plt.scatter(reg.predict(X_test), reg.predict(X_test) - y_test,
 			color = "blue", s = 10, label = 'Test data')
 
 ## plotting line for zero residual error
