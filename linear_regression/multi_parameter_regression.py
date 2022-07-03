@@ -5,6 +5,7 @@ import numpy as np
 from sklearn import datasets, linear_model, metrics
 import os
 dirname = os.path.dirname(__file__)
+print(dirname)
 relative_path_to_file = '../data/preprocessed_files/rbi/crop_data_pairs.csv'
 filename = os.path.join(dirname, relative_path_to_file)
 

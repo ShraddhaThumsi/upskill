@@ -1,7 +1,12 @@
-file_name = '../data/rbi/crop_turnout.txt'
-outfile_path = '../data/rbi/crop_data_pairs.csv'
+import os
+dirname = os.path.dirname(__file__)
+print(dirname)
+relative_path_to_file = '../data/preprocessed_files/rbi/crop_turnout.txt'
+outfile_path = '../data/preprocessed_files/rbi/crop_data_pairs.csv'
+fullpath_to_datafile = os.path.join(dirname, relative_path_to_file)
+fullpath_to_outfile = os.path.join(dirname, outfile_path)
 print('filename is:')
-print(file_name)
+print(fullpath_to_datafile)
 import csv
 def read_data_from_file(f):
     print('in read data function')
@@ -13,7 +18,7 @@ def read_data_from_file(f):
     file.close()
     return lines
 print('about to call read data function')
-all_data = read_data_from_file(file_name)
+all_data = read_data_from_file(fullpath_to_datafile)
 headers = all_data[0]
 data = all_data[1:]
 def prepare_data_pairs(headers, vals,crop='Rice'):
@@ -47,7 +52,7 @@ data_pairs = prepare_data_rows(data)
 for p in data_pairs:
     print(p)
 
-with open(outfile_path,'w') as file:
+with open(fullpath_to_outfile,'w') as file:
     writer = csv.writer(file)
     writer.writerows(data_pairs)
 
