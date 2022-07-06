@@ -40,13 +40,36 @@ def gradient_descent(beta,X,y, learning_rate = 0.01, convergence_threshold = 0.0
         num_of_iter += 1
     return beta, num_of_iter
 beta = np.matrix(np.zeros(X.shape[1]))
+print("shape of beta")
+print(beta.shape)
 logistic = logistic_function(beta,X)
 gradient = gradient_of_sigmoid_wrt_params(beta, X, y)
 total_cost = cost_function(beta,X,y)
-predicted_beta , num_of_iters = gradient_descent(beta,X,y)
-print(logistic)
-print(gradient)
+beta, num_of_iters = gradient_descent(beta,X,y)
+print("shape of activation function")
+print(logistic.shape)
+print("shape of logistic gradient")
+print(gradient.shape)
+print("shape of total cost")
 print(total_cost)
-print(predicted_beta)
+print("shape of predicted beta ")
+print(beta.shape)
 print(num_of_iters)
+
+def get_predicted_labels(logistic):
+    probabilities = logistic
+    print("shape of probabilities")
+    print(probabilities.shape)
+    predicted_labels = np.where(probabilities >= 0.5,1,0)
+    return np.squeeze(predicted_labels)
+
+predicted_labels = get_predicted_labels(logistic)
+print("shape of true labels")
+print(y.shape)
+print("shape of predicted labels")
+print(predicted_labels.shape)
+print("totally correct predictions:")
+print(np.sum(y==predicted_labels))
+
+
 
