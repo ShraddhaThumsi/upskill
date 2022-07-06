@@ -23,11 +23,30 @@ def gradient_of_sigmoid_wrt_params(beta, X, y):
     gradient = np.dot(diff_in_preds.T,X)
     return gradient
 
+def cost_function(beta,X,y):
+    predicted_val = logistic_function(beta,X)
+    loss_value_array = - (y * np.log(predicted_val)) - ((1-y)*np.log(1-predicted_val))
+    return np.mean(loss_value_array)
 
-
+def gradient_descent(beta,X,y, learning_rate = 0.01, convergence_threshold = 0.0001):
+    total_cost = cost_function(beta,X,y)
+    change_of_cost = 1
+    num_of_iter = 1
+    while(change_of_cost > convergence_threshold):
+        old_cost = total_cost
+        beta = beta - (learning_rate * gradient_of_sigmoid_wrt_params(beta,X,y))
+        total_cost = cost_function(beta,X,y)
+        change_of_cost = old_cost - total_cost
+        num_of_iter += 1
+    return beta, num_of_iter
 beta = np.matrix(np.zeros(X.shape[1]))
 logistic = logistic_function(beta,X)
 gradient = gradient_of_sigmoid_wrt_params(beta, X, y)
+total_cost = cost_function(beta,X,y)
+predicted_beta , num_of_iters = gradient_descent(beta,X,y)
 print(logistic)
 print(gradient)
+print(total_cost)
+print(predicted_beta)
+print(num_of_iters)
 
