@@ -12,8 +12,22 @@ def normalize(data):
     range_of_data = maxval - minval
     normalized = 1- ((maxval-data)/range_of_data)
     return normalized
-normalized_data = normalize(X)
+X = normalize(X)
 
 def logistic_function(beta,X):
-    return 1.0/(1+np.exp(np.dot(beta.T,X)))
+    return 1.0/(1+np.exp(np.dot(X,beta.T)))
+
+def gradient_of_sigmoid_wrt_params(beta, X, y):
+    predicted_value = logistic_function(beta,X)
+    diff_in_preds = predicted_value - y
+    gradient = np.dot(diff_in_preds.T,X)
+    return gradient
+
+
+
+beta = np.matrix(np.zeros(X.shape[1]))
+logistic = logistic_function(beta,X)
+gradient = gradient_of_sigmoid_wrt_params(beta, X, y)
+print(logistic)
+print(gradient)
 
