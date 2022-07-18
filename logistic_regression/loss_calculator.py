@@ -64,12 +64,12 @@ def get_predicted_labels(logistic):
     return np.squeeze(predicted_labels)
 
 predicted_labels = get_predicted_labels(logistic)
-print("shape of true labels")
+"""print("shape of true labels")
 print(y.shape)
 print("shape of predicted labels")
 print(predicted_labels.shape)
 print("totally correct predictions:")
-print(np.sum(y==predicted_labels))
+print(np.sum(y==predicted_labels))"""
 
 
 
