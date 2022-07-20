@@ -1,3 +1,4 @@
+# credits to https://www.geeksforgeeks.org/understanding-logistic-regression/
 import numpy as np
 import loss_calculator
 import matplotlib.pyplot as plt
