@@ -64,6 +64,8 @@ def get_predicted_labels(logistic):
     return np.squeeze(predicted_labels)
 
 predicted_labels = get_predicted_labels(logistic)
+print("shape of estimated parameter array beta:")
+print(beta.shape)
 """print("shape of true labels")
 print(y.shape)
 print("shape of predicted labels")

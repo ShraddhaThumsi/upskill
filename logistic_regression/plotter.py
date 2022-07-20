@@ -1,6 +1,6 @@
 import numpy as np
 import loss_calculator
-import matplotlib as plt
+import matplotlib.pyplot as plt
 def plot_regression(X,y,beta):
     x_0 = X[np.where(y==0.0)]
     x_1 = X[np.where(y==1.0)]
@@ -19,10 +19,12 @@ def plot_regression(X,y,beta):
 
 X = loss_calculator.X
 y = loss_calculator.y
-beta = np.matrix(np.zeros(X.shape[1]))
-beta, numer_iter = loss_calculator.gradient_descent(X,y,beta)
-print('Estimated regression coefficients: ' +  beta)
-print('No. of iterations' + numer_iter)
-y_pred = loss_calculator.pred_values(beta,X)
+
+beta = loss_calculator.beta
+numer_iter = loss_calculator.num_of_iters
+print('Estimated regression coefficients: ' +  str(beta))
+print('No. of iterations' + str(numer_iter))
+logistic = loss_calculator.logistic_function(beta,X)
+y_pred = loss_calculator.get_predicted_labels(logistic)
 print(np.sum(y==y_pred))
 plot_regression(X,y,beta)
