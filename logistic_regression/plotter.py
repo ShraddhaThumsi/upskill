@@ -25,7 +25,7 @@ beta = loss_calculator.beta
 numer_iter = loss_calculator.num_of_iters
 print('Estimated regression coefficients: ' +  str(beta))
 print('No. of iterations' + str(numer_iter))
-logistic = loss_calculator.logistic_function(beta,X)
+logistic = loss_calculator.logistic_function(beta, X)
 y_pred = loss_calculator.get_predicted_labels(logistic)
 print(np.sum(y==y_pred))
 plot_regression(X,y,beta)

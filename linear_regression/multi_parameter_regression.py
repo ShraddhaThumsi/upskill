@@ -2,15 +2,13 @@
 # for skeleton of code
 import matplotlib.pyplot as plt
 import numpy as np
-from sklearn import datasets, linear_model, metrics
+from sklearn import linear_model
 import os
+import csv
 dirname = os.path.dirname(__file__)
-print(dirname)
+
 relative_path_to_file = '../data/preprocessed_files/rbi/crop_data_pairs.csv'
 filename = os.path.join(dirname, relative_path_to_file)
-
-import csv
-
 file = open(filename)
 csvreader = csv.reader(file)
 x_axis_vals = []
@@ -25,19 +23,11 @@ X = np.array(x_axis_vals).astype(np.float)
 y = np.array(y_axis_vals).astype(np.float)
 
 
-"""
-# load the boston dataset
-boston = datasets.load_boston(return_X_y=False)
-
-# defining feature matrix(X) and response vector(y)
-X = boston.data
-y = boston.target"""
-
 # splitting X and y into training and testing sets
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4,
 													random_state=1)
-print(type(X_train))
+
 
 # create linear regression object
 reg = linear_model.LinearRegression()
@@ -51,28 +41,39 @@ print('Coefficients: ', reg.coef_)
 # variance score: 1 means perfect prediction
 print('Variance score: {}'.format(reg.score(X_test, y_test)))
 
+print("printing shape of train data - data first, label 2nd")
+print(X_train.shape)
+print(y_train.shape)
+
+
+print("printing shape of test data -data first, label 2nd")
+print(X_test.shape)
+print(y_test.shape)
 # plot for residual error
+def plot_variance():
+	## setting plot style
+	plt.style.use('fivethirtyeight')
 
-## setting plot style
-plt.style.use('fivethirtyeight')
+	## plotting residual errors in training data
+	plt.scatter(reg.predict(X_train), reg.predict(X_train) - y_train,
+				color="green", s=10, label='Train data')
 
-## plotting residual errors in training data
-plt.scatter(reg.predict(X_train), reg.predict(X_train) - y_train,
-			color = "green", s = 10, label = 'Train data')
+	## plotting residual errors in test data
+	plt.scatter(reg.predict(X_test), reg.predict(X_test) - y_test,
+				color="blue", s=10, label='Test data')
 
-## plotting residual errors in test data
-plt.scatter(reg.predict(X_test), reg.predict(X_test) - y_test,
-			color = "blue", s = 10, label = 'Test data')
+	## plotting line for zero residual error
+	# plt.hlines(y=reg.score(X_train, y_train),xmin=0,xmax=3500,linewidth=2,color='b',label='closeness score of train data')
+	plt.hlines(y=reg.score(X_test, y_test), xmin=0, xmax=3500, linewidth=2, color='r',
+			   label='closeness score of test data')
 
-## plotting line for zero residual error
-plt.hlines(y = 0, xmin = 0, xmax = 3500, linewidth = 2)
+	## plotting legend
+	plt.legend(loc='lower right')
 
-## plotting legend
-plt.legend(loc = 'upper right')
+	## plot title
+	plt.title("Closeness to true total cereal production in lakh tonnes from 1950-2021")
 
-## plot title
-plt.title("Residual errors")
-
-## method call for showing the plot
-plt.show()
+	## method call for showing the plot
+	plt.show()
+plot_variance()
 
